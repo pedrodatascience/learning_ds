@@ -1,2 +1,3 @@
-##Seja bem-vindo!##
-Repositório para projetos pessoais.
+Seja bem-vindo!
+
+Repositório de projetos pessoais.
