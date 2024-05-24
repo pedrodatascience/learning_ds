@@ -8,10 +8,12 @@ url = "https://www.google.com/"
 inicio = timeit.default_timer()
 
 # configuração do webdriver do selenium
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument('--headless=new')
-driver = webdriver.Chrome(options=chrome_options)
+def create_driver():
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--headless=new')
+    return webdriver.Chrome(options=chrome_options)
 
+driver = create_driver()
 
 cotacao_euro = []
 cotacao_dolar = []
@@ -48,10 +50,15 @@ async def dolar():
         print("Falha ao fazer a raspagem")
 
 #configuração para utilizar o asyncio
-loop = asyncio.get_event_loop()
-tarefas = asyncio.gather(euro(), dolar())
-loop.run_until_complete(tarefas)
-loop.close()
+async def main():
+    await asyncio.gather(euro(), dolar())
+
+try:
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main())
+finally:
+    driver.quit()
+    loop.close()
 
            
 print(f'valor do euro: {cotacao_euro} | valor do dolar: {cotacao_dolar}') #printa os valores da cotação
