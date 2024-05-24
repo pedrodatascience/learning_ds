@@ -1,3 +1,3 @@
 Seja bem-vindo!
 
-Repositório de projetos pessoais.
+Repositório de projetos pessoais!
